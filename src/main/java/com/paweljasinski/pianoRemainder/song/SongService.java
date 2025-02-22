@@ -1,12 +1,16 @@
 package com.paweljasinski.pianoRemainder.song;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class SongService {
 
     private final SongRepository songRepository;
@@ -19,9 +23,29 @@ public class SongService {
         return songRepository.findAll();
     }
 
-    public Optional<Song> getSongByTitle(String title){
-        return songRepository.findSongByTitle(title);
+    public Song getSongByTitle(String title){
+        Optional<Song> song = songRepository.findSongByTitle(title);
+        Song theSong = null;
+
+        if (song.isPresent()) {
+            theSong = song.get();
+        }
+        else {
+            throw new SongNotFoundException("Did not find song by title - " + title);
+        }
+
+        return theSong;
     }
+
+
+    public List<Song> getSongsByComposer(String composer) {
+        List<Song> songs = songRepository.findSongsByComposer(composer);
+        if (songs.isEmpty()) {
+            throw new SongNotFoundException("Did not find songs by composer - " + composer);
+        }
+        return songs;
+    }
+
 
     public Song addSong(Song song){
         songRepository.save(song);
@@ -29,9 +53,18 @@ public class SongService {
     }
 
     @Transactional
-    public void deleteSong(Song song){
-        songRepository.delete(song);
-    }
+    public void deleteSong(String title){
+        Optional<Song> song = songRepository.findSongByTitle(title);
+        Song theSong = null;
 
+        if(song.isPresent()){
+            theSong = song.get();
+        }
+        else{
+            throw new SongNotFoundException("Did not find song by title - " + title);
+        }
+
+        songRepository.delete(theSong);
+    }
 
 }

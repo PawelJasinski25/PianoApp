@@ -3,6 +3,7 @@ package com.paweljasinski.pianoRemainder.song;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "songs")
 public class Song {
 
     @Id
@@ -18,6 +19,8 @@ public class Song {
 
     @Column(name="video_url")
     private String videoUrl;
+
+    public Song(){}
 
     public Song(int id, String title, String composer, String videoUrl) {
         this.id = id;
