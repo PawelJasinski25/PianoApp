@@ -37,6 +37,20 @@ public class SongService {
         return theSong;
     }
 
+    public Song getSongById(int id){
+        Optional<Song> song = songRepository.findSongById(id);
+        Song theSong = null;
+
+        if (song.isPresent()) {
+            theSong = song.get();
+        }
+        else {
+            throw new SongNotFoundException("Did not find song by id - " + id);
+        }
+
+        return theSong;
+    }
+
 
     public List<Song> getSongsByComposer(String composer) {
         List<Song> songs = songRepository.findSongsByComposer(composer);
@@ -62,6 +76,21 @@ public class SongService {
         }
         else{
             throw new SongNotFoundException("Did not find song by title - " + title);
+        }
+
+        songRepository.delete(theSong);
+    }
+
+    @Transactional
+    public void deleteSongById(int id){
+        Optional<Song> song = songRepository.findSongById(id);
+        Song theSong = null;
+
+        if(song.isPresent()){
+            theSong = song.get();
+        }
+        else{
+            throw new SongNotFoundException("Did not find song by id - " + id);
         }
 
         songRepository.delete(theSong);

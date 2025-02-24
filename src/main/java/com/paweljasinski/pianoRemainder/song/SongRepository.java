@@ -10,5 +10,6 @@ import java.util.Optional;
 public interface SongRepository extends JpaRepository<Song,Integer> {
 
     public Optional<Song> findSongByTitle(String title);
+    public Optional<Song> findSongById(int id);
     public List<Song> findSongsByComposer(String composer);
 }
