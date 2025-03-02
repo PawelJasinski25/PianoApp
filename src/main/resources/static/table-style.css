@@ -1,0 +1,92 @@
+/* Navbar - spójny z głównym stylem */
+.custom-navbar {
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    max-width: 80%;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #20247b;
+}
+
+.btn-primary {
+    background-color: #fc5356;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #d32f2f;
+}
+
+/* Table Styling */
+.custom-table {
+    width: 100%;
+    margin: 20px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.custom-table th {
+    background: #20247b;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+.custom-table td {
+    text-align: center;
+    padding: 12px;
+}
+
+/* Table Hover Effect */
+.custom-table tbody tr:hover {
+    background-color: #fc5356;
+    color: white;
+    transition: 0.3s;
+}
+
+/* Buttons inside table */
+.table-actions .btn {
+    margin: 2px;
+    padding: 6px 12px;
+    border-radius: 5px;
+}
+
+.table-actions .btn-info {
+    background-color: #20247b;
+    border: none;
+}
+
+.table-actions .btn-info:hover {
+    background-color: #151a52;
+}
+
+.table-actions .btn-danger {
+    background-color: #fc5356;
+    border: none;
+}
+
+.table-actions .btn-danger:hover {
+    background-color: #d32f2f;
+}
+
+/* Add Song Button */
+.btn-add {
+    background-color: #fc5356;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.btn-add:hover {
+    background-color: #d32f2f;
+}

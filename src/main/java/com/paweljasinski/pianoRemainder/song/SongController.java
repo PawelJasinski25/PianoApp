@@ -17,6 +17,12 @@ public class SongController {
         this.songService = songService;
     }
 
+
+    @GetMapping("/")
+    public String showHomePage() {
+        return "index";
+    }
+
     @GetMapping("/list")
     public String getSongs(Model model){
         List<Song> songs = songService.getAllSongs();

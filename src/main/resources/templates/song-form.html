@@ -1,51 +1,59 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Save Song</title>
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-
-  <title>Save Employee</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <link rel="stylesheet" th:href="@{/form-style.css}">
 </head>
 
 <body>
 
-<div class="container">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+  <div class="container">
+    <a class="navbar-brand" th:href="@{/}">🎹 PianoTrack</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <a href="#" class="btn btn-primary">Login</a>
+    </div>
+  </div>
+</nav>
 
-  <h3>Song Directory</h3>
+<!-- Form Section -->
+<div class="container form-container">
+  <h3 class="section-title">Save Song</h3>
   <hr>
 
-  <p class="h4 mb-4">Save Song</p>
-
-  <form action="#" th:action="@{/songs/save}"
-        th:object="${song}" method="POST">
-
-
+  <form action="#" th:action="@{/songs/save}" th:object="${song}" method="POST">
     <input type="hidden" th:field="*{id}">
 
-    <input type="text" th:field="*{title}"
-           class="form-control mb-4 w-25" placeholder="Title">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" id="title" th:field="*{title}" class="form-control" placeholder="Enter song title">
+    </div>
 
-    <input type="text" th:field="*{composer}"
-           class="form-control mb-4 w-25" placeholder="Composer">
+    <div class="mb-3">
+      <label for="composer" class="form-label">Composer</label>
+      <input type="text" id="composer" th:field="*{composer}" class="form-control" placeholder="Enter composer name">
+    </div>
 
-    <input type="text" th:field="*{videoUrl}"
-           class="form-control mb-4 w-25" placeholder="Video Url">
+    <div class="mb-3">
+      <label for="videoUrl" class="form-label">Video URL</label>
+      <input type="text" id="videoUrl" th:field="*{videoUrl}" class="form-control" placeholder="Enter video URL">
+    </div>
 
-    <button type="submit" class="btn btn-info col-2">Save</button>
-
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a th:href="@{/songs/list}" class="btn btn-secondary">Back to Songs List</a>
   </form>
-
-  <hr>
-  <a th:href="@{/songs/list}">Back to Songs List</a>
-
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
