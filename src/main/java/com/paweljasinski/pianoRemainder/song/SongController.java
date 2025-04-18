@@ -1,22 +1,27 @@
 package com.paweljasinski.pianoRemainder.song;
 
+import com.paweljasinski.pianoRemainder.play.PlayService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/songs")
 public class SongController {
 
     private final SongService songService;
-    public SongController(SongService songService){
+    private final PlayService playService;
+    public SongController(SongService songService, PlayService playService){
         this.songService = songService;
+        this.playService = playService;
     }
-
 
     @GetMapping("/")
     public String showHomePage() {
@@ -26,10 +31,35 @@ public class SongController {
     @GetMapping("/list")
     public String getSongs(Model model){
         List<Song> songs = songService.getAllSongs();
+
+        Map<Integer, Integer> playsLastWeek = new HashMap<>();
+
+        for (Song song : songs) {
+            int playCount = playService.getPlaysCountLastWeek(song.getId()); // Pobieramy liczbę zagrań
+            playsLastWeek.put(song.getId(), playCount);
+        }
+
         model.addAttribute("songs", songs);
+        model.addAttribute("playsLastWeek", playsLastWeek);
         return "list-songs";
 
     }
+
+    @GetMapping("/lets-play")
+    public String getSongsToPlay(Model model){
+        List<Song> songs = songService.getAllSongs();
+        Map<Integer, Integer> playsLastWeek = new HashMap<>();
+
+        for (Song song : songs) {
+            int playCount = playService.getPlaysCountLastWeek(song.getId()); // Pobieramy liczbę zagrań
+            playsLastWeek.put(song.getId(), playCount);
+        }
+
+        model.addAttribute("songs", songs);
+        model.addAttribute("playsLastWeek", playsLastWeek);
+        return "lets-play";
+    }
+
 
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model model){

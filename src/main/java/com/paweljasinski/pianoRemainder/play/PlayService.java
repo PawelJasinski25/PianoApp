@@ -26,37 +26,37 @@ public class PlayService {
     public int getPlaysCountLastWeek(int songId){
         LocalDateTime today = LocalDateTime.now();
         LocalDateTime start = today.minusWeeks(1);
-        return playRepository.countPlayByIdAndPlayedAtBetween(songId, start, today);
+        return playRepository.countPlayBySongIdAndPlayedAtBetween(songId, start, today);
     }
 
     public int getPlaysCountLastMonth(int songId){
         LocalDateTime today = LocalDateTime.now();
         LocalDateTime start = today.minusMonths(1);
-        return playRepository.countPlayByIdAndPlayedAtBetween(songId, start, today);
+        return playRepository.countPlayBySongIdAndPlayedAtBetween(songId, start, today);
     }
 
     public int getPlaysCountLastYear(int songId){
         LocalDateTime today = LocalDateTime.now();
         LocalDateTime start = today.minusYears(1);
-        return playRepository.countPlayByIdAndPlayedAtBetween(songId, start, today);
+        return playRepository.countPlayBySongIdAndPlayedAtBetween(songId, start, today);
     }
 
 
     List<Play> getPlaysLastWeek(int songId){
         LocalDateTime today = LocalDateTime.now();
         LocalDateTime start = today.minusWeeks(1);
-        return playRepository.findPlayByIdAndPlayedAtBetween(songId, start, today);
+        return playRepository.findPlayBySongIdAndPlayedAtBetween(songId, start, today);
     }
 
     List<Play> getPlaysLastMonth(int songId){
         LocalDateTime today = LocalDateTime.now();
         LocalDateTime start = today.minusMonths(1);
-        return playRepository.findPlayByIdAndPlayedAtBetween(songId, start, today);
+        return playRepository.findPlayBySongIdAndPlayedAtBetween(songId, start, today);
     }
 
     List<Play> getPlaysLastYear(int songId){
         LocalDateTime today = LocalDateTime.now();
         LocalDateTime start = today.minusYears(1);
-        return playRepository.findPlayByIdAndPlayedAtBetween(songId, start, today);
+        return playRepository.findPlayBySongIdAndPlayedAtBetween(songId, start, today);
     }
 }

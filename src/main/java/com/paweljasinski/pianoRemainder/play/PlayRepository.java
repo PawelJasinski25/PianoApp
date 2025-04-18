@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface PlayRepository extends JpaRepository<Play, Integer> {
 
-    List<Play> findPlayByIdAndPlayedAtBetween(int song_id, LocalDateTime start, LocalDateTime end);
-    Integer countPlayByIdAndPlayedAtBetween(int song_id, LocalDateTime start, LocalDateTime end);
+    List<Play> findPlayBySongIdAndPlayedAtBetween(int song_id, LocalDateTime start, LocalDateTime end);
+    Integer countPlayBySongIdAndPlayedAtBetween(int song_id, LocalDateTime start, LocalDateTime end);
 }

@@ -1,18 +1,34 @@
 package com.paweljasinski.pianoRemainder.play;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import com.paweljasinski.pianoRemainder.song.Song;
+import com.paweljasinski.pianoRemainder.song.SongService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-@RestController
+@Controller
 public class PlayController {
     private final PlayService playService;
+    private final SongService songService;
 
-    public PlayController(PlayService playService) {
+    public PlayController(PlayService playService, SongService songService) {
         this.playService = playService;
+        this.songService = songService;
     }
+
+
+    @PostMapping("/addNewPlay")
+    public String addNewPlay(@RequestParam("songId") int songId) {
+        Song song = songService.getSongById(songId);
+        if (song != null) {
+            Play play = new Play(song, LocalDateTime.now());
+            playService.addPlay(play);
+        }
+        return "redirect:/songs/lets-play";
+    }
+
 
     @GetMapping("/plays")
     public List<Play> getPlays(){
@@ -33,6 +49,8 @@ public class PlayController {
     public int countPlaysLastYear(@PathVariable int songId){
         return playService.getPlaysCountLastYear(songId);
     }
+
+
 }
 
 

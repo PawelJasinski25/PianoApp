@@ -38,6 +38,7 @@
         <th>Title</th>
         <th>Composer</th>
         <th>Video URL</th>
+        <th>Plays Last Week</th>
         <th>Action</th>
       </tr>
       </thead>
@@ -46,6 +47,7 @@
         <td th:text="${song.title}"></td>
         <td th:text="${song.composer}"></td>
         <td th:text="${song.videoUrl}"></td>
+        <td th:text="${playsLastWeek[song.id]} ?: 0"></td>
         <td>
           <a th:href="@{/songs/showFormForUpdate(songId=${song.id})}" class="btn btn-info btn-sm">Update</a>
           <a th:href="@{/songs/delete(songId=${song.id})}" class="btn btn-danger btn-sm" onclick="showDeleteModal(this)" th:attr="data-url=@{/songs/delete(songId=${song.id})}">Delete</a>
